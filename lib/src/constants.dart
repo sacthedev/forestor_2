@@ -7,3 +7,4 @@ const kGold = Color(0xffefa00b);
 const kLightGreen = Color(0xff00ff95);
 const kSoftGreen = Color(0xff2ec4b6);
 const kWhite = Color(0xFFFFFFFF);
+const kTextMuted = Color(0xD2D2D2D2);

@@ -88,7 +88,7 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
             child: Container(
                 child: Container(
               child: _showData
-                  ? Text(bodyText, style: TextStyle(color: kWhite))
+                  ? Text(bodyText, style: TextStyle(color: kTextMuted))
                   : null,
             ))),
       ]),
