@@ -2,14 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
-import 'package:forestor_2/src/views/ui/tree_info_page.dart';
+import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 
-class AllTreesPage extends StatelessWidget {
+class SubKeyAllTrees extends StatelessWidget {
   final List<Tree> allTrees;
-  const AllTreesPage({required this.allTrees});
-
+  final List<int> treeIDs;
+  const SubKeyAllTrees(
+      {Key? key, required this.treeIDs, required this.allTrees})
+      : super(key: key);
   @override
-  Widget build(BuildContext contextAlpha) {
+  Widget build(BuildContext context) {
+    List<Tree> filteredTreeList = filterTrees(treeIDs, allTrees);
     return Scaffold(
       backgroundColor: kDarkBlue,
       appBar: AppBar(
@@ -17,25 +20,24 @@ class AllTreesPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: kWhite),
           onPressed: () {
-            Navigator.pop(contextAlpha);
+            Navigator.pop(context);
           },
         ),
-        title: Text("Trees in Database: ${allTrees.length}"),
       ),
       body: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: allTrees.length,
+        itemCount: filteredTreeList.length,
         itemBuilder: (BuildContext context, int index) {
-          Tree tree = allTrees[index];
+          Tree tree = filteredTreeList[index];
           return Container(
             margin: const EdgeInsets.all(20),
             alignment: Alignment.center,
             child: InkWell(
               onTap: () {
                 Navigator.push(
-                    contextAlpha,
+                    context,
                     MaterialPageRoute(
-                        builder: (contextAlpha) => TreeInfoPage(tree: tree)));
+                        builder: (context) => TreeInfoPage(tree: tree)));
               },
               child: Container(
                   padding: const EdgeInsets.all(10),
@@ -64,4 +66,17 @@ class AllTreesPage extends StatelessWidget {
       ),
     );
   }
+}
+
+filterTrees(treeIDs, allTrees) {
+  List<Tree> filteredTreeList = [];
+  for (var id in treeIDs) {
+    for (var tree in allTrees) {
+      if (tree.id == id) {
+        filteredTreeList.add(tree);
+        break;
+      }
+    }
+  }
+  return filteredTreeList;
 }

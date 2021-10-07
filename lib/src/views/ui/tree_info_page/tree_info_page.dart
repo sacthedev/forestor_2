@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
-import 'package:forestor_2/src/views/ui/tree_info_image_widget.dart';
+import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_image_widget.dart';
 import 'package:path/path.dart';
 import 'tree_info_dropdown_widget.dart';
 

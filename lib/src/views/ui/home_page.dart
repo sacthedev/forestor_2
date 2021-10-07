@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/data/tree.dart';
+import 'package:forestor_2/src/views/ui/key_page/key_page.dart';
 import '../../constants.dart';
-import './all_trees_page.dart';
+import 'all_trees_page/all_trees_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext contextAlpha) {
-    final List<String> buttonOptions = <String>["View All Trees"];
+    final List<String> buttonOptions = <String>["View All Trees", "Key"];
     return Scaffold(
         backgroundColor: kDarkBlue,
         appBar: AppBar(
@@ -51,7 +52,12 @@ class _HomePageState extends State<HomePage> {
                 child: InkWell(
                     onTap: () {
                       if (index == 0) {
-                        Navigator.of(contextAlpha).push(_createRoute(trees));
+                        Navigator.of(contextAlpha)
+                            .push(_createRoute(AllTreesPage(allTrees: trees)));
+                      } else if (index == 1) {
+                        Navigator.of(contextAlpha).push(_createRoute(KeyPage(
+                          allTrees: trees,
+                        )));
                       }
                     },
                     child: Container(
@@ -72,11 +78,9 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Route _createRoute(trees) {
+Route _createRoute(page) {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => AllTreesPage(
-      allTrees: trees,
-    ),
+    pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       var begin = Offset(1.0, 0.0);
       var end = Offset(0.0, 0.0);

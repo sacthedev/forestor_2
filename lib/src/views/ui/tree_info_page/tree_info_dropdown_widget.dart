@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants.dart';
-import '../../data/tree.dart';
+import '../../../constants.dart';
+import '../../../data/tree.dart';
 import 'dart:math' as math;
 
 class TreeInfoDropdownWidget extends StatefulWidget {
