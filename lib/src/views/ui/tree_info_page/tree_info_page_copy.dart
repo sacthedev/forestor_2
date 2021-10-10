@@ -2,25 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
-import 'package:forestor_2/src/views/ui/breadcrumb.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_image_widget.dart';
+import 'package:path/path.dart';
 import 'tree_info_dropdown_widget.dart';
 
-class TreeInfoPageArguments {
-  final Tree tree;
-  TreeInfoPageArguments(this.tree);
-}
-
-class TreeInfoPage extends StatefulWidget {
-  const TreeInfoPage({Key? key, required this.tree}) : super(key: key);
-  final Tree tree;
-  static const String route = '/treeinfopage';
-
-  @override
-  _TreeInfoPageState createState() => _TreeInfoPageState();
-}
-
-class _TreeInfoPageState extends State<TreeInfoPage> {
+class TreeInfoPage extends StatelessWidget {
+  Tree tree;
+  TreeInfoPage({Key? key, required this.tree}) : super(key: key);
   @override
   Widget build(BuildContext contextAlpha) {
     return Scaffold(
@@ -28,24 +16,17 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: kWhite),
-          onPressed: () {
-            Navigator.pop(contextAlpha);
-            breadcrumb.removeLast();
-          },
+          onPressed: () => Navigator.pop(contextAlpha),
         ),
         backgroundColor: kLightBlue,
       ),
-      body: Stack(children: [
-        CustomScrollView(slivers: <Widget>[
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Container(padding: const EdgeInsets.only(top: 40)),
-            Header(tree: widget.tree),
-            ImageArea(tree: widget.tree),
-            InfoBody(tree: widget.tree),
-          ]))
-        ]),
-        BreadCrumb()
+      body: CustomScrollView(slivers: <Widget>[
+        SliverList(
+            delegate: SliverChildListDelegate([
+          Header(tree: tree),
+          ImageArea(tree: tree),
+          InfoBody(tree: tree),
+        ]))
       ]),
     );
   }

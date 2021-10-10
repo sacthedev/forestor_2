@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/data/tree.dart';
+import 'package:forestor_2/src/views/ui/breadcrumb.dart';
 import 'package:forestor_2/src/views/ui/key_page/key_page.dart';
 import '../../constants.dart';
 import 'all_trees_page/all_trees_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
+  static const String route = '/';
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -41,40 +42,48 @@ class _HomePageState extends State<HomePage> {
           title: const Text('HOME'),
           backgroundColor: kLightBlue,
         ),
-        body: ListView.separated(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          itemCount: buttonOptions.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-                padding: const EdgeInsets.all(20),
-                height: 100,
-                alignment: Alignment.center,
-                child: InkWell(
-                    onTap: () {
-                      if (index == 0) {
-                        Navigator.of(contextAlpha)
-                            .push(_createRoute(AllTreesPage(allTrees: trees)));
-                      } else if (index == 1) {
-                        Navigator.of(contextAlpha).push(_createRoute(KeyPage(
-                          allTrees: trees,
-                        )));
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        buttonOptions[index],
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: kGold),
-                    )));
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(color: kLightGreen),
-        ));
+        body: Stack(children: [
+          ListView.separated(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            itemCount: buttonOptions.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                  padding: const EdgeInsets.all(20),
+                  height: 100,
+                  alignment: Alignment.center,
+                  child: InkWell(
+                      onTap: () {
+                        if (index == 0) {
+                          Navigator.pushNamed(context, AllTreesPage.route,
+                              arguments: AllTreesArguments(trees));
+                          breadcrumb.add(AllTreesPage.route);
+                          /*
+                          Navigator.of(contextAlpha).push(
+                              _createRoute(AllTreesPage(allTrees: trees)));
+                              */
+                        } else if (index == 1) {
+                          Navigator.of(contextAlpha).push(_createRoute(KeyPage(
+                            allTrees: trees,
+                          )));
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          buttonOptions[index],
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: kGold),
+                      )));
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(color: kLightGreen),
+          ),
+          BreadCrumb()
+        ]));
   }
 }
 
