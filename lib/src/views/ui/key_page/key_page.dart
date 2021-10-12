@@ -8,7 +8,7 @@ import '../../../constants.dart';
 class KeyPage extends StatelessWidget {
   final List<Tree> allTrees;
   KeyPage({Key? key, required this.allTrees}) : super(key: key);
-  Map<String, dynamic> KEY = treeKey;
+  Map<String, dynamic> KEY = getTreeKey();
   @override
   Widget build(BuildContext contextAlpha) {
     return Scaffold(
