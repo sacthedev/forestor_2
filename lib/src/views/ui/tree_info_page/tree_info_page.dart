@@ -23,31 +23,36 @@ class TreeInfoPage extends StatefulWidget {
 class _TreeInfoPageState extends State<TreeInfoPage> {
   @override
   Widget build(BuildContext contextAlpha) {
-    return Scaffold(
-      backgroundColor: kDarkBlue,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: kWhite),
-          onPressed: () {
-            Navigator.pop(contextAlpha);
-            breadcrumb.removeLast();
-          },
-        ),
-        backgroundColor: kLightBlue,
-      ),
-      body: Stack(children: [
-        CustomScrollView(slivers: <Widget>[
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Container(padding: const EdgeInsets.only(top: 40)),
-            Header(tree: widget.tree),
-            ImageArea(tree: widget.tree),
-            InfoBody(tree: widget.tree),
-          ]))
-        ]),
-        BreadCrumb()
-      ]),
-    );
+    return WillPopScope(
+        onWillPop: () async {
+          breadcrumb.removeLast();
+          return true;
+        },
+        child: Scaffold(
+          backgroundColor: kDarkBlue,
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: kWhite),
+              onPressed: () {
+                Navigator.pop(contextAlpha);
+                breadcrumb.removeLast();
+              },
+            ),
+            backgroundColor: kLightBlue,
+          ),
+          body: Stack(children: [
+            CustomScrollView(slivers: <Widget>[
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                Container(padding: const EdgeInsets.only(top: 40)),
+                Header(tree: widget.tree),
+                ImageArea(tree: widget.tree),
+                InfoBody(tree: widget.tree),
+              ]))
+            ]),
+            BreadCrumb()
+          ]),
+        ));
   }
 }
 
