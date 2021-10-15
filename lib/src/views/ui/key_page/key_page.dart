@@ -15,9 +15,10 @@ class KeyPage extends StatelessWidget {
   KeyPage({Key? key, required this.allTrees}) : super(key: key);
   final List<Tree> allTrees;
   static const String route = "/key";
-  Map<String, dynamic> KEY = getTreeKey();
+  // ignore: non_constant_identifier_names
+  final Map<String, dynamic> KEY = getTreeKey();
   @override
-  Widget build(BuildContext contextAlpha) {
+  Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
           breadcrumb.removeLast();
@@ -29,7 +30,7 @@ class KeyPage extends StatelessWidget {
               leading: IconButton(
                   icon: const Icon(Icons.arrow_back, color: kWhite),
                   onPressed: () {
-                    Navigator.pop(contextAlpha);
+                    Navigator.pop(context);
                     breadcrumb.removeLast();
                   }),
               title: const Text("KEY"),
@@ -68,7 +69,7 @@ class KeyPage extends StatelessWidget {
                           )));
                 },
               ),
-              BreadCrumb()
+              const BreadCrumb()
             ])));
   }
 }

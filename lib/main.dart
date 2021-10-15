@@ -4,16 +4,14 @@ import 'package:forestor_2/src/views/ui/key_page/key_page.dart';
 import 'package:forestor_2/src/views/ui/key_page/sub_key_all_trees.dart';
 import 'package:forestor_2/src/views/ui/key_page/sub_key_page.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
-import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
-import 'package:path/path.dart';
 import 'src/views/ui/home_page.dart';
 
 void main() {
   // ignore: prefer_function_declarations_over_variables
   RouteTransitionsBuilder transitionBuilder =
       (context, animation, animationB, child) {
-    var begin = Offset(1.0, 0.0);
-    var end = Offset(0.0, 0.0);
+    var begin = const Offset(1.0, 0.0);
+    var end = const Offset(0.0, 0.0);
     var curve = Curves.easeOutCubic;
     var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
     return SlideTransition(position: animation.drive(tween), child: child);
@@ -30,7 +28,7 @@ void main() {
       } else if (settings.name == HomePage.route) {
         return PageRouteBuilder(
             settings: settings,
-            pageBuilder: (_, __, ___) => HomePage(),
+            pageBuilder: (_, __, ___) => const HomePage(),
             transitionsBuilder: transitionBuilder);
       } else if (settings.name == TreeInfoPage.route) {
         final args = settings.arguments as TreeInfoPageArguments;

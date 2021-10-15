@@ -83,13 +83,14 @@ class _AllTreesPageState extends State<AllTreesPage> {
                 );
               },
             ),
-            BreadCrumb()
+            const BreadCrumb()
           ]),
         ));
   }
 }
 
 class AllTreesPageStack extends StatelessWidget {
+  const AllTreesPageStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container();

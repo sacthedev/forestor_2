@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_image_widget.dart';
-import 'package:path/path.dart';
 import 'tree_info_dropdown_widget.dart';
 
 class TreeInfoPage extends StatelessWidget {
-  Tree tree;
-  TreeInfoPage({Key? key, required this.tree}) : super(key: key);
+  final Tree tree;
+  const TreeInfoPage({Key? key, required this.tree}) : super(key: key);
   @override
-  Widget build(BuildContext contextAlpha) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kDarkBlue,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: kWhite),
-          onPressed: () => Navigator.pop(contextAlpha),
+          onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: kLightBlue,
       ),
@@ -34,7 +33,7 @@ class TreeInfoPage extends StatelessWidget {
 
 class Header extends StatelessWidget {
   final Tree tree;
-  const Header({required this.tree});
+  const Header({Key? key, required this.tree}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +59,7 @@ class Header extends StatelessWidget {
 
 class InfoBody extends StatelessWidget {
   final Tree tree;
-  const InfoBody({required this.tree});
+  const InfoBody({Key? key, required this.tree}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

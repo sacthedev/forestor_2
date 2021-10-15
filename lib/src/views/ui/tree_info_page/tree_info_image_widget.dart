@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:forestor_2/src/data/tree.dart';
 
 class ImageArea extends StatelessWidget {
-  Tree tree;
-  ImageArea({Key? key, required this.tree}) : super(key: key);
+  final Tree tree;
+  const ImageArea({Key? key, required this.tree}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

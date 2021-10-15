@@ -6,6 +6,7 @@ import 'package:forestor_2/src/views/ui/home_page.dart';
 List<String> breadcrumb = [HomePage.route];
 
 class BreadCrumb extends StatelessWidget {
+  const BreadCrumb({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,8 +24,9 @@ class BreadCrumb extends StatelessWidget {
 class BreadCrumbItem extends StatefulWidget {
   final String name;
   const BreadCrumbItem({
+    Key? key,
     required this.name,
-  });
+  }) : super(key: key);
   @override
   _BreadCrumbItemState createState() => _BreadCrumbItemState();
 }
@@ -34,7 +36,6 @@ class _BreadCrumbItemState extends State<BreadCrumbItem> {
   var color = Colors.blue;
   @override
   Widget build(BuildContext context) {
-    print('widget.name: ${widget.name}');
     return Row(
       children: [
         Text(widget.name == '/' ? ' ' : ' > ',

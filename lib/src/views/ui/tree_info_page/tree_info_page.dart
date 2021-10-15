@@ -50,7 +50,7 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
                 InfoBody(tree: widget.tree),
               ]))
             ]),
-            BreadCrumb()
+            const BreadCrumb()
           ]),
         ));
   }
@@ -58,7 +58,7 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
 
 class Header extends StatelessWidget {
   final Tree tree;
-  const Header({required this.tree});
+  const Header({Key? key, required this.tree}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +84,7 @@ class Header extends StatelessWidget {
 
 class InfoBody extends StatelessWidget {
   final Tree tree;
-  const InfoBody({required this.tree});
-
+  const InfoBody({Key? key, required this.tree}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(

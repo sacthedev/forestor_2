@@ -6,11 +6,11 @@ import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 
 class AllTreesPage extends StatelessWidget {
   final List<Tree> allTrees;
-  const AllTreesPage({required this.allTrees});
+  const AllTreesPage({Key? key, required this.allTrees}) : super(key: key);
   //static const String route = '/alltrees';
 
   @override
-  Widget build(BuildContext contextAlpha) {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kDarkBlue,
       appBar: AppBar(
@@ -18,7 +18,7 @@ class AllTreesPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: kWhite),
           onPressed: () {
-            Navigator.pop(contextAlpha);
+            Navigator.pop(context);
           },
         ),
         title: Text("Trees in Database: ${allTrees.length}"),
@@ -34,9 +34,9 @@ class AllTreesPage extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 Navigator.push(
-                    contextAlpha,
+                    context,
                     MaterialPageRoute(
-                        builder: (contextAlpha) => TreeInfoPage(tree: tree)));
+                        builder: (context) => TreeInfoPage(tree: tree)));
               },
               child: Container(
                   padding: const EdgeInsets.all(10),

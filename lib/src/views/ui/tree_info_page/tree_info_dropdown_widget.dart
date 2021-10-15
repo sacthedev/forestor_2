@@ -27,8 +27,8 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
   @override
   void initState() {
     super.initState();
-    _arrowAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _arrowAnimationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
     _arrowAnimation = Tween(begin: math.pi / 2, end: (3 * math.pi) / 2)
         .animate(_arrowAnimationController);
     if (widget.dataType == 'fieldCharacteristics') {
@@ -64,7 +64,7 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
                 animation: _arrowAnimationController,
                 builder: (context, child) => Transform.rotate(
                   angle: _arrowAnimation.value,
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     color: kWhite,
                   ),
@@ -73,24 +73,22 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
               Container(
                   margin: const EdgeInsets.all(10),
                   child: Text(widget.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: kWhite,
                           fontWeight: FontWeight.w600,
                           fontSize: 18)),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
                           bottom: BorderSide(width: 2, color: kLightGreen)))),
             ])),
         AnimatedSize(
-            vsync: this,
             curve: Curves.easeIn,
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             child: Container(
-                child: Container(
               child: _showData
-                  ? Text(bodyText, style: TextStyle(color: kTextMuted))
+                  ? Text(bodyText, style: const TextStyle(color: kTextMuted))
                   : null,
-            ))),
+            )),
       ]),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: kLightBlue),

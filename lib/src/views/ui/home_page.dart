@@ -27,9 +27,6 @@ class _HomePageState extends State<HomePage> {
     var _trees = await handler.allTrees();
     setState(() {
       trees = _trees;
-      print("setupList");
-      print(trees);
-      print("/* END setupList() */");
     });
   }
 
@@ -80,20 +77,7 @@ class _HomePageState extends State<HomePage> {
             separatorBuilder: (BuildContext context, int index) =>
                 const Divider(color: kLightGreen),
           ),
-          BreadCrumb()
+          const BreadCrumb()
         ]));
   }
-}
-
-Route _createRoute(page) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(1.0, 0.0);
-      var end = Offset(0.0, 0.0);
-      var curve = Curves.easeOutCubic;
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      return SlideTransition(position: animation.drive(tween), child: child);
-    },
-  );
 }

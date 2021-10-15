@@ -4,7 +4,6 @@ import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
 import 'package:forestor_2/src/views/ui/key_page/sub_key_all_trees.dart';
-import 'package:forestor_2/src/views/ui/key_page/subkey_dropdown_widget.dart';
 
 class SubKeyPageArguments {
   final List<Tree> allTrees;
@@ -20,7 +19,7 @@ class SubKeyPage extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext contextAlpha) {
+  Widget build(BuildContext context) {
     /*
     List<> dropDownList = [];
     for (var element in subKeys) {
@@ -38,7 +37,7 @@ class SubKeyPage extends StatelessWidget {
               leading: IconButton(
                   icon: const Icon(Icons.arrow_back, color: kWhite),
                   onPressed: () {
-                    Navigator.pop(contextAlpha);
+                    Navigator.pop(context);
                     breadcrumb.removeLast();
                   }),
               title: const Text("SUBKEY"),
@@ -91,7 +90,7 @@ class SubKeyPage extends StatelessWidget {
                           color: kGold),
                     );
                   }),
-              BreadCrumb()
+              const BreadCrumb()
             ])));
   }
 }

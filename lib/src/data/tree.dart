@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+// ignore: constant_identifier_names
 const DATABASENAME = "trees.db";
 
 class Tree {
@@ -39,9 +40,6 @@ class DatabaseHandler {
     const _databaseName = DATABASENAME;
     var path = join(databasesPath, _databaseName);
 
-    // Should happen only the first time you launch your application
-    print("Creating new copy from asset");
-
     // Make sure the parent directory exists
     try {
       await Directory(dirname(path)).create(recursive: true);
@@ -59,24 +57,19 @@ class DatabaseHandler {
   }
 
   Future<List<Map<String, dynamic>>> retrieveAllTrees() async {
-    print('retrieveAllTrees()');
     final Database db = await initializeDB();
     final List<Map<String, dynamic>> queryResult = await db.query('tree');
     db.close();
-    print(queryResult);
-    // return ("/* End of retrieveAllTrees() */");
     return (queryResult);
   }
 
   Future<List<Tree>> allTrees() async {
-    print('allTrees()');
     var _allTrees = await retrieveAllTrees();
     List<Tree> res = [];
 
     for (int i = 0; i < _allTrees.length; i++) {
       res.add(Tree.fromMap(_allTrees[i]));
     }
-    print(res);
     return res;
   }
 }
