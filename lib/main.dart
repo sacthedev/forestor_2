@@ -47,16 +47,22 @@ void main() {
         final args = settings.arguments as SubKeyPageArguments;
         return PageRouteBuilder(
           settings: settings,
-          pageBuilder: (_, __, ___) =>
-              SubKeyPage(subKeys: args.subKeys, allTrees: args.allTrees),
+          pageBuilder: (_, __, ___) => SubKeyPage(
+              subKeys: args.subKeys,
+              allTrees: args.allTrees,
+              subKeyText: args.subKeyText),
           transitionsBuilder: transitionBuilder,
         );
       } else if (settings.name == SubKeyAllTrees.route) {
         final args = settings.arguments as SubKeyAllTreesPageArguments;
         return PageRouteBuilder(
           settings: settings,
-          pageBuilder: (_, __, ___) =>
-              SubKeyAllTrees(treeIDs: args.treeIDs, allTrees: args.allTrees),
+          pageBuilder: (_, __, ___) => SubKeyAllTrees(
+            treeIDs: args.treeIDs,
+            allTrees: args.allTrees,
+            subKeyText: args.subKeyText,
+            subCharacteristicText: args.subCharacteristicText,
+          ),
           transitionsBuilder: transitionBuilder,
         );
       }

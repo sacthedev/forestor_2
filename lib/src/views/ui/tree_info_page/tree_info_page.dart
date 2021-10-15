@@ -39,6 +39,8 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
               },
             ),
             backgroundColor: kLightBlue,
+            title: const Text("Tree Information"),
+            centerTitle: true,
           ),
           body: Stack(children: [
             CustomScrollView(slivers: <Widget>[

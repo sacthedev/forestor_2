@@ -8,24 +8,24 @@ import 'package:forestor_2/src/views/ui/key_page/sub_key_all_trees.dart';
 class SubKeyPageArguments {
   final List<Tree> allTrees;
   final List<Map> subKeys;
-  SubKeyPageArguments(this.subKeys, this.allTrees);
+  String subKeyText;
+  SubKeyPageArguments(this.subKeys, this.allTrees, this.subKeyText);
 }
 
 class SubKeyPage extends StatelessWidget {
   final List<Map> subKeys;
   final List<Tree> allTrees;
+  final String subKeyText;
   static const String route = '/subkeypage';
-  const SubKeyPage({Key? key, required this.subKeys, required this.allTrees})
+  const SubKeyPage(
+      {Key? key,
+      required this.subKeys,
+      required this.allTrees,
+      required this.subKeyText})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    /*
-    List<> dropDownList = [];
-    for (var element in subKeys) {
-      dropDownList.add(SubKeyDropdownWidget(characteristic: element));
-    }
-    */
     return WillPopScope(
         onWillPop: () async {
           breadcrumb.removeLast();
@@ -40,7 +40,7 @@ class SubKeyPage extends StatelessWidget {
                     Navigator.pop(context);
                     breadcrumb.removeLast();
                   }),
-              title: const Text("SUBKEY"),
+              title: Text('${subKeyText.toUpperCase()} KEY'),
               centerTitle: true,
               backgroundColor: kLightBlue,
             ),
@@ -64,18 +64,9 @@ class SubKeyPage extends StatelessWidget {
                       alignment: Alignment.center,
                       child: InkWell(
                           onTap: () {
-                            /*
-                            Navigator.push(
-                                contextAlpha,
-                                MaterialPageRoute(
-                                    builder: (contextAlpha) => SubKeyAllTrees(
-                                          treeIDs: treeIDs,
-                                          allTrees: allTrees,
-                                        )));
-                                        */
                             Navigator.pushNamed(context, SubKeyAllTrees.route,
                                 arguments: SubKeyAllTreesPageArguments(
-                                    allTrees, treeIDs));
+                                    allTrees, treeIDs, subKeyText, _keyText));
                             breadcrumb.add(SubKeyAllTrees.route);
                           },
                           child: Container(

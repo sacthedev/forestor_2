@@ -11,3 +11,4 @@
 - [ ] add about page
 - [ ] add more key information
 - [ ] implement search feature
+- [ ] implement sort feature

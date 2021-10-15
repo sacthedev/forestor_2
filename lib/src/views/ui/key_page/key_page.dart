@@ -53,9 +53,10 @@ class KeyPage extends StatelessWidget {
                           onTap: () {
                             List<Map> subCharacteristics =
                                 KEY[_key]["subCharacteristics"];
+                            String subKeyText = KEY[_key]["text"];
                             Navigator.pushNamed(context, SubKeyPage.route,
                                 arguments: SubKeyPageArguments(
-                                    subCharacteristics, allTrees));
+                                    subCharacteristics, allTrees, subKeyText));
                             breadcrumb.add(SubKeyPage.route);
                           },
                           child: Container(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
@@ -8,14 +9,23 @@ import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 class SubKeyAllTreesPageArguments {
   final List<Tree> allTrees;
   final List<int> treeIDs;
-  SubKeyAllTreesPageArguments(this.allTrees, this.treeIDs);
+  final String subKeyText;
+  final String subCharacteristicText;
+  SubKeyAllTreesPageArguments(
+      this.allTrees, this.treeIDs, this.subKeyText, this.subCharacteristicText);
 }
 
 class SubKeyAllTrees extends StatelessWidget {
   final List<Tree> allTrees;
   final List<int> treeIDs;
+  final String subKeyText;
+  final String subCharacteristicText;
   const SubKeyAllTrees(
-      {Key? key, required this.treeIDs, required this.allTrees})
+      {Key? key,
+      required this.treeIDs,
+      required this.allTrees,
+      required this.subKeyText,
+      required this.subCharacteristicText})
       : super(key: key);
   static const String route = '/subkeyalltrees';
   @override
@@ -37,6 +47,28 @@ class SubKeyAllTrees extends StatelessWidget {
                   breadcrumb.removeLast();
                 },
               ),
+              flexibleSpace: SafeArea(
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 60, right: 20),
+                      alignment: Alignment.center,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Flexible(
+                                child: Text(
+                              '${subKeyText.toUpperCase()} KEY',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            )),
+                            FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Text(subCharacteristicText.toLowerCase(),
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontStyle: FontStyle.italic)))
+                          ]))),
             ),
             body: Stack(children: [
               ListView.builder(
