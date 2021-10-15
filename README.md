@@ -8,3 +8,6 @@
 - [ ] add about page
 - [ ] add animation to all pages
 - [ ] add more key information
+- [ ] add splashscreen
+- [ ] add logo
+- [ ] implement search feature
