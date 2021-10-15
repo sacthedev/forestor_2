@@ -53,12 +53,6 @@ class _AllTreesPageState extends State<AllTreesPage> {
                   alignment: Alignment.center,
                   child: InkWell(
                     onTap: () {
-                      /*
-                  Navigator.push(
-                      contextAlpha,
-                      MaterialPageRoute(
-                          builder: (contextAlpha) => TreeInfoPage(tree: tree)));
-                          */
                       Navigator.pushNamed(context, TreeInfoPage.route,
                           arguments: TreeInfoPageArguments(tree));
                       breadcrumb.add(TreeInfoPage.route);

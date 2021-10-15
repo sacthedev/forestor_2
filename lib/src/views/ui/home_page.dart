@@ -58,20 +58,11 @@ class _HomePageState extends State<HomePage> {
                               arguments: AllTreesArguments(trees));
                           breadcrumb = [HomePage.route];
                           breadcrumb.add(AllTreesPage.route);
-                          /*
-                          Navigator.of(contextAlpha).push(
-                              _createRoute(AllTreesPage(allTrees: trees)));
-                              */
                         } else if (index == 1) {
                           Navigator.pushNamed(context, KeyPage.route,
                               arguments: KeyPageArguments(trees));
                           breadcrumb = [HomePage.route];
                           breadcrumb.add(KeyPage.route);
-                          /*
-                          Navigator.of(contextAlpha).push(_createRoute(KeyPage(
-                            allTrees: trees,
-                          )));
-                          */
                         }
                       },
                       child: Container(

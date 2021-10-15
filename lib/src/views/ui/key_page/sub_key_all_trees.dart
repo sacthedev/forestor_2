@@ -5,6 +5,12 @@ import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 
+class SubKeyAllTreesPageArguments {
+  final List<Tree> allTrees;
+  final List<int> treeIDs;
+  SubKeyAllTreesPageArguments(this.allTrees, this.treeIDs);
+}
+
 class SubKeyAllTrees extends StatelessWidget {
   final List<Tree> allTrees;
   final List<int> treeIDs;
@@ -46,11 +52,8 @@ class SubKeyAllTrees extends StatelessWidget {
                     alignment: Alignment.center,
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    TreeInfoPage(tree: tree)));
+                        Navigator.pushNamed(context, TreeInfoPage.route,
+                            arguments: TreeInfoPageArguments(tree));
                         breadcrumb.add(TreeInfoPage.route);
                       },
                       child: Container(

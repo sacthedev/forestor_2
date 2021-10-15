@@ -32,7 +32,7 @@ class KeyPage extends StatelessWidget {
                     Navigator.pop(contextAlpha);
                     breadcrumb.removeLast();
                   }),
-              title: Text("KEY"),
+              title: const Text("KEY"),
               centerTitle: true,
               backgroundColor: kLightBlue,
             ),
@@ -52,19 +52,9 @@ class KeyPage extends StatelessWidget {
                           onTap: () {
                             List<Map> subCharacteristics =
                                 KEY[_key]["subCharacteristics"];
-                            /*
-                    print("/* subCharacteristics */");
-                    print('length: ${subCharacteristics.length}');
-                    print(subCharacteristics);
-                    print("/***********************/");
-                    */
-                            Navigator.push(
-                                contextAlpha,
-                                MaterialPageRoute(
-                                    builder: (contextAlpha) => SubKeyPage(
-                                          subKeys: subCharacteristics,
-                                          allTrees: allTrees,
-                                        )));
+                            Navigator.pushNamed(context, SubKeyPage.route,
+                                arguments: SubKeyPageArguments(
+                                    subCharacteristics, allTrees));
                             breadcrumb.add(SubKeyPage.route);
                           },
                           child: Container(
