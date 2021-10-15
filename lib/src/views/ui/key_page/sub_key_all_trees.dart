@@ -39,7 +39,10 @@ class SubKeyAllTrees extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   Tree tree = filteredTreeList[index];
                   return Container(
-                    margin: const EdgeInsets.all(20),
+                    margin: index == 0
+                        ? const EdgeInsets.only(
+                            left: 20, right: 20, bottom: 20, top: 50)
+                        : const EdgeInsets.all(20),
                     alignment: Alignment.center,
                     child: InkWell(
                       onTap: () {

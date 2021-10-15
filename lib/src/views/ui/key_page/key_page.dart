@@ -44,7 +44,9 @@ class KeyPage extends StatelessWidget {
                   String _key = KEY.keys.elementAt(index);
                   return Container(
                       padding: const EdgeInsets.all(20),
-                      margin: const EdgeInsets.only(left: 10, right: 10),
+                      margin: index == 0
+                          ? const EdgeInsets.only(left: 10, right: 10, top: 50)
+                          : const EdgeInsets.only(left: 10, right: 10),
                       alignment: Alignment.center,
                       child: InkWell(
                           onTap: () {
