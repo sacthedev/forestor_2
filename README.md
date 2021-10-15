@@ -2,9 +2,9 @@
 
 ## Todo
 
-- [ ] add each tree's correct image
-- [ ] add breadcrumb to 'key' pages
-- [ ] support for system backbutton on breadcrumb
+- [x] add each tree's correct image
+- [x] add breadcrumb to 'key' pages
+- [x] support for system backbutton on breadcrumb
 - [ ] add about page
 - [ ] add animation to all pages
 - [ ] add more key information
