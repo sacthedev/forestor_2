@@ -8,7 +8,10 @@ class ImageArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String imagePath = "assets/tree_image.PNG";
+    //String imagePath = "assets/tree_image.PNG";
+    String imagePath = "./assets/tree_images/" +
+        tree.scientificName.split(' ').join('_').toLowerCase() +
+        ".png";
     return Container(
         padding: const EdgeInsets.all(10),
         child: Image(image: AssetImage(imagePath)));
