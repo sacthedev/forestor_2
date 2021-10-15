@@ -7,7 +7,7 @@
 - [x] support for system backbutton on breadcrumb
 - [x] add splashscreen
 - [x] add logo
+- [x] add animation to all pages
 - [ ] add about page
-- [ ] add animation to all pages
 - [ ] add more key information
 - [ ] implement search feature
