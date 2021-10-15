@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.forestor_2">
    <application
-        android:label="forestor_2"
+        android:label="Forestor"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
