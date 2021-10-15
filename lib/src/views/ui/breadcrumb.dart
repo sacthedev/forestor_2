@@ -13,7 +13,8 @@ class BreadCrumb extends StatelessWidget {
         height: 40.0,
         width: double.infinity,
         color: kDarkBlue,
-        child: Row(
+        child: ListView(
+          scrollDirection: Axis.horizontal,
           children: breadcrumb.map((e) => BreadCrumbItem(name: e)).toList(),
         ));
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/views/ui/all_trees_page/all_trees_page.dart';
+import 'package:forestor_2/src/views/ui/key_page/key_page.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 import 'package:path/path.dart';
@@ -29,6 +30,13 @@ void main() {
         final args = settings.arguments as TreeInfoPageArguments;
         return MaterialPageRoute(builder: (context) {
           return TreeInfoPage(tree: args.tree);
+        });
+      } else if (settings.name == KeyPage.route) {
+        final args = settings.arguments as KeyPageArguments;
+        return MaterialPageRoute(builder: (context) {
+          return KeyPage(
+            allTrees: args.allTrees,
+          );
         });
       }
     },
