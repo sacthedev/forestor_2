@@ -8,12 +8,12 @@ import 'package:forestor_2/src/data/slash_scent.dart';
 
 Map<String, dynamic> treeKey = {};
 getTreeKey() {
-  treeKey.addAll(baseOfTree);
+  treeKey.addAll(crownFeatures);
   treeKey.addAll(shapeOfBole);
   treeKey.addAll(barkSurfaceColor);
   treeKey.addAll(slashScent);
   treeKey.addAll(exudate);
+  treeKey.addAll(baseOfTree);
   treeKey.addAll(presenceObservedInForestType);
-  treeKey.addAll(crownFeatures);
   return treeKey;
 }
