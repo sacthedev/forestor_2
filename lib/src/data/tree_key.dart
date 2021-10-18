@@ -1,5 +1,6 @@
 import 'package:forestor_2/src/data/bark_surface_color.dart';
 import 'package:forestor_2/src/data/base_of_tree.dart';
+import 'package:forestor_2/src/data/crown_features.dart';
 import 'package:forestor_2/src/data/exudate.dart';
 import 'package:forestor_2/src/data/presence_observed_in_forest_type.dart';
 import 'package:forestor_2/src/data/shape_of_bole.dart';
@@ -13,5 +14,6 @@ getTreeKey() {
   treeKey.addAll(slashScent);
   treeKey.addAll(exudate);
   treeKey.addAll(presenceObservedInForestType);
+  treeKey.addAll(crownFeatures);
   return treeKey;
 }
