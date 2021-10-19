@@ -20,6 +20,64 @@ class AllTreesPage extends StatefulWidget {
 }
 
 class _AllTreesPageState extends State<AllTreesPage> {
+  late List<Tree> treesToDisplayOnPage;
+  late Widget title;
+  late Widget searchIcon;
+  bool isSearchButtonPressed = false;
+  late Widget defaultTitleArea;
+  late Widget searchTitleArea;
+  final searchController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    searchController.addListener(searchInputListener);
+    treesToDisplayOnPage = widget.allTrees;
+    title = Text("Tree in Database : ${widget.allTrees.length}");
+    searchIcon = const Icon(Icons.search);
+    defaultTitleArea = Row(children: [
+      Expanded(child: Container(child: title)),
+      IconButton(
+          onPressed: () => setState(() => isSearchButtonPressed = true),
+          icon: const Icon(Icons.search))
+    ]);
+    searchTitleArea = Row(
+      children: [
+        Expanded(
+            child: TextFormField(
+          controller: searchController,
+          autofocus: true,
+          style: const TextStyle(color: kWhite),
+        )),
+        IconButton(
+            onPressed: () => setState(() {
+                  searchController.text = "";
+                  isSearchButtonPressed = false;
+                }),
+            icon: const Icon(Icons.dangerous_rounded))
+      ],
+    );
+  }
+
+  void searchInputListener() {
+    String searchText = searchController.text;
+    List<Tree> searchQueryResult = [];
+    for (var tree in widget.allTrees) {
+      if (tree.primaryName.toLowerCase().contains(searchText) ||
+          tree.scientificName.toLowerCase().contains(searchText)) {
+        searchQueryResult.add(tree);
+      }
+    }
+    setState(() {
+      treesToDisplayOnPage = searchQueryResult;
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext contextAlpha) {
     return WillPopScope(
@@ -30,22 +88,22 @@ class _AllTreesPageState extends State<AllTreesPage> {
         child: Scaffold(
           backgroundColor: kDarkBlue,
           appBar: AppBar(
-            backgroundColor: kLightBlue,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: kWhite),
-              onPressed: () {
-                Navigator.pop(contextAlpha);
-                breadcrumb.removeLast();
-              },
-            ),
-            title: Text("Trees in Database: ${widget.allTrees.length}"),
-          ),
+              backgroundColor: kLightBlue,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: kWhite),
+                onPressed: () {
+                  Navigator.pop(contextAlpha);
+                  breadcrumb.removeLast();
+                },
+              ),
+              title:
+                  isSearchButtonPressed ? searchTitleArea : defaultTitleArea),
           body: Stack(children: [
             ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
-              itemCount: widget.allTrees.length,
+              itemCount: treesToDisplayOnPage.length,
               itemBuilder: (BuildContext context, int index) {
-                Tree tree = widget.allTrees[index];
+                Tree tree = treesToDisplayOnPage[index];
                 return Container(
                   margin: index == 0
                       ? const EdgeInsets.only(top: 50)
