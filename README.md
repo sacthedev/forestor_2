@@ -8,13 +8,13 @@
 - [x] add splashscreen
 - [x] add logo
 - [x] add animation to all pages
+- [x] center list items to screen on home page
 - [ ] add more preamble to README.md page such as app info and screenshots
 - [ ] add about page
 - [ ] add more key information
 - [ ] implement search feature
 - [ ] implement sort feature
 - [ ] remove home breadcrumb from home page
-- [ ] center list items to screen on home page
 - [ ] find proper breadcrumb names viewing all trees
 - [ ] find proper breadcrumb names in key
 - [ ] in the tree info dropdown widget when closing the drawer the words disappear instead of closing with drawer, fix so

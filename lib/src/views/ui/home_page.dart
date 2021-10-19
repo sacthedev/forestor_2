@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
@@ -39,16 +40,12 @@ class _HomePageState extends State<HomePage> {
           title: const Text('HOME'),
           backgroundColor: kLightBlue,
         ),
-        body: Stack(children: [
-          ListView.separated(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-            itemCount: buttonOptions.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                  padding: const EdgeInsets.all(20),
-                  height: 100,
-                  alignment: Alignment.center,
-                  child: InkWell(
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: buttonOptions.map((buttonName) {
+                  int index = buttonOptions.indexOf(buttonName);
+                  return (InkWell(
                       onTap: () {
                         if (index == 0) {
                           Navigator.pushNamed(context, AllTreesPage.route,
@@ -63,21 +60,17 @@ class _HomePageState extends State<HomePage> {
                         }
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          buttonOptions[index],
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
+                        padding: const EdgeInsets.all(40),
+                        margin: const EdgeInsets.all(40),
+                        child: Text(buttonName,
+                            style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
+                            )),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: kGold),
                       )));
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(color: kLightGreen),
-          ),
-          const BreadCrumb()
-        ]));
+                }).toList())));
   }
 }
