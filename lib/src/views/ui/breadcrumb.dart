@@ -61,7 +61,6 @@ class _BreadCrumbItemState extends State<BreadCrumbItem> {
                   breadcrumb.removeLast();
                 });
               }
-              print(routeNames[widget.name]);
             },
             child: Container(
               padding: const EdgeInsets.only(right: 10),
