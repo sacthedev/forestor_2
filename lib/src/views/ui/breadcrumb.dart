@@ -1,9 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/constants.dart';
+import 'package:forestor_2/src/views/ui/all_trees_page/all_trees_page.dart';
 import 'package:forestor_2/src/views/ui/home_page.dart';
+import 'package:forestor_2/src/views/ui/key_page/key_page.dart';
+import 'package:forestor_2/src/views/ui/key_page/sub_key_all_trees.dart';
+import 'package:forestor_2/src/views/ui/key_page/sub_key_page.dart';
+import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 
 List<String> breadcrumb = [HomePage.route];
+Map<String, String> routeNames = {
+  HomePage.route: 'Home',
+  AllTreesPage.route: 'All Trees',
+  TreeInfoPage.route: 'Tree Info',
+  KeyPage.route: 'Key',
+  SubKeyPage.route: 'SubKey',
+  SubKeyAllTrees.route: 'SubKey All Trees'
+};
 
 class BreadCrumb extends StatelessWidget {
   const BreadCrumb({Key? key}) : super(key: key);
@@ -48,6 +61,7 @@ class _BreadCrumbItemState extends State<BreadCrumbItem> {
                   breadcrumb.removeLast();
                 });
               }
+              print(routeNames[widget.name]);
             },
             child: Container(
               padding: const EdgeInsets.only(right: 10),
@@ -55,7 +69,7 @@ class _BreadCrumbItemState extends State<BreadCrumbItem> {
                   child: Text(
                     widget.name == '/'
                         ? 'Home'
-                        : ' ' + widget.name.substring(1),
+                        : ' ' + (routeNames[widget.name]).toString(),
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 15.0,

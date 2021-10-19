@@ -14,9 +14,9 @@
 - [ ] add more key information
 - [ ] implement search feature
 - [ ] implement sort feature
-- [x] # remove home breadcrumb from home page
-- [ ] find proper breadcrumb names viewing all trees
-- [ ] find proper breadcrumb names in key
+- [x] remove home breadcrumb from home page
+- [x] find proper breadcrumb names viewing all trees
+- [x] find proper breadcrumb names in key
 - [ ] in the tree info dropdown widget when closing the drawer the words disappear instead of closing with drawer, fix so
       that words close i.e. slide up with drawer when closing as it slides down when opening
 
