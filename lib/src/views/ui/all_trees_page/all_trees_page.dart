@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
@@ -27,6 +28,7 @@ class _AllTreesPageState extends State<AllTreesPage> {
   late Widget defaultTitleArea;
   late Widget searchTitleArea;
   final searchController = TextEditingController();
+  String currentSortType = "scientific name";
   @override
   void initState() {
     super.initState();
@@ -106,7 +108,7 @@ class _AllTreesPageState extends State<AllTreesPage> {
                 Tree tree = treesToDisplayOnPage[index];
                 return Container(
                   margin: index == 0
-                      ? const EdgeInsets.only(top: 50)
+                      ? const EdgeInsets.only(top: 70, bottom: 20)
                       : const EdgeInsets.all(20),
                   alignment: Alignment.center,
                   child: InkWell(
@@ -141,7 +143,68 @@ class _AllTreesPageState extends State<AllTreesPage> {
                 );
               },
             ),
-            const BreadCrumb()
+            const BreadCrumb(),
+            Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width / 1.6, top: 5),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: ListTileTheme(
+                        dense: true,
+                        //minVerticalPadding: 1,
+                        //horizontalTitleGap: 2,
+                        child: ExpansionTile(
+                          //tilePadding: const EdgeInsets.symmetric(horizontal: 5.0),
+                          backgroundColor: kGold,
+                          collapsedBackgroundColor: kGold,
+                          iconColor: kWhite,
+                          textColor: kWhite,
+                          collapsedTextColor: kWhite,
+                          collapsedIconColor: kWhite,
+                          title: const Text("Sort By",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15.0,
+                                  color: kWhite)),
+                          subtitle: Text(currentSortType,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 12.0,
+                                  color: kWhite)),
+                          children: [
+                            ListTile(
+                              title: const Text("Common Name",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14.0,
+                                      color: kWhite)),
+                              onTap: () {
+                                setState(() {
+                                  currentSortType = "Common Name";
+                                  treesToDisplayOnPage.sort((a, b) =>
+                                      (a.primaryName).compareTo(b.primaryName));
+                                });
+                              },
+                            ),
+                            ListTile(
+                              title: const Text("Scientific Name",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14.0,
+                                      color: kWhite)),
+                              onTap: () {
+                                setState(() {
+                                  currentSortType = "Scientific Name";
+                                  treesToDisplayOnPage.sort((a, b) =>
+                                      (a.scientificName)
+                                          .compareTo(b.scientificName));
+                                });
+                              },
+                            )
+                          ],
+                        ))))
           ]),
         ));
   }

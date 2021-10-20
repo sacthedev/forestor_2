@@ -13,13 +13,19 @@
 - [ ] add about page
 - [ ] add more key information
 - [x] implement search feature
-- [ ] implement sort feature
+- [x] implement sort feature
 - [x] remove home breadcrumb from home page
 - [x] find proper breadcrumb names viewing all trees
 - [x] find proper breadcrumb names in key
 - [ ] in the tree info dropdown widget when closing the drawer the words disappear instead of closing with drawer, fix so
       that words close i.e. slide up with drawer when closing as it slides down when opening
 - [ ] add related dropdown to tree info
+
+### Sort Feature
+
+- [ ] have subtitle on the same line
+- [ ] when an item within the sort dropdown is clicked close the dropdown
+- [ ] in dropdown highlight the current sort parameter in use
 
 ## Features to maybe add in the future
 
