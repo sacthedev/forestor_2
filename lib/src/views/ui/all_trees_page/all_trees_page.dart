@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
+import 'package:forestor_2/src/views/ui/sort_widget.dart';
 
 class AllTreesArguments {
   final List<Tree> allTrees;
@@ -11,8 +13,10 @@ class AllTreesArguments {
 }
 
 class AllTreesPage extends StatefulWidget {
-  const AllTreesPage({Key? key, required this.allTrees}) : super(key: key);
+  AllTreesPage({Key? key, required this.allTrees}) : super(key: key);
   static const String route = '/alltrees';
+  final GlobalKey<_AllTreesPageState> allTreesPageStateKey = GlobalKey();
+
   final List<Tree> allTrees;
 
   @override
@@ -20,6 +24,7 @@ class AllTreesPage extends StatefulWidget {
 }
 
 class _AllTreesPageState extends State<AllTreesPage> {
+  //final _SortWidgetStateKey = SortWidget().getGlobalKey();
   late List<Tree> treesToDisplayOnPage;
   late Widget title;
   late Widget searchIcon;
@@ -27,6 +32,7 @@ class _AllTreesPageState extends State<AllTreesPage> {
   late Widget defaultTitleArea;
   late Widget searchTitleArea;
   final searchController = TextEditingController();
+  String currentSortType = "Scientific Name";
   @override
   void initState() {
     super.initState();
@@ -80,6 +86,23 @@ class _AllTreesPageState extends State<AllTreesPage> {
 
   @override
   Widget build(BuildContext contextAlpha) {
+    sortByPrimaryName() => setState(() {
+          currentSortType = "Primary Name";
+          treesToDisplayOnPage
+              .sort((a, b) => (a.primaryName).compareTo(b.primaryName));
+        });
+    sortByScientificName() => setState(() {
+          currentSortType = "Scientific Name";
+          treesToDisplayOnPage
+              .sort((a, b) => (a.scientificName).compareTo(b.scientificName));
+        });
+
+    changeSortType(sortType) {
+      sortType == "Scientific Name"
+          ? sortByScientificName()
+          : sortByPrimaryName();
+    }
+
     return WillPopScope(
         onWillPop: () async {
           breadcrumb.removeLast();
@@ -106,7 +129,7 @@ class _AllTreesPageState extends State<AllTreesPage> {
                 Tree tree = treesToDisplayOnPage[index];
                 return Container(
                   margin: index == 0
-                      ? const EdgeInsets.only(top: 50)
+                      ? const EdgeInsets.only(top: 70, bottom: 20)
                       : const EdgeInsets.all(20),
                   alignment: Alignment.center,
                   child: InkWell(
@@ -141,7 +164,11 @@ class _AllTreesPageState extends State<AllTreesPage> {
                 );
               },
             ),
-            const BreadCrumb()
+            const BreadCrumb(),
+            SortWidget(
+              sortTypeText: currentSortType,
+              changeSortTypeFunction: changeSortType,
+            ),
           ]),
         ));
   }
