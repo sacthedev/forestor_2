@@ -23,9 +23,9 @@
 
 ### Sort Feature
 
-- [ ] have subtitle on the same line
-- [ ] when an item within the sort dropdown is clicked close the dropdown
-- [ ] in dropdown highlight the current sort parameter in use
+- [x] have subtitle on the same line
+- [x] when an item within the sort dropdown is clicked close the dropdown
+- [x] in dropdown highlight the current sort parameter in use
 
 ## Features to maybe add in the future
 

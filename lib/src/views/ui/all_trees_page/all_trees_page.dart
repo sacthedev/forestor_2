@@ -5,6 +5,7 @@ import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
+import 'package:forestor_2/src/views/ui/sort_widget.dart';
 
 class AllTreesArguments {
   final List<Tree> allTrees;
@@ -12,8 +13,10 @@ class AllTreesArguments {
 }
 
 class AllTreesPage extends StatefulWidget {
-  const AllTreesPage({Key? key, required this.allTrees}) : super(key: key);
+  AllTreesPage({Key? key, required this.allTrees}) : super(key: key);
   static const String route = '/alltrees';
+  final GlobalKey<_AllTreesPageState> allTreesPageStateKey = GlobalKey();
+
   final List<Tree> allTrees;
 
   @override
@@ -21,6 +24,7 @@ class AllTreesPage extends StatefulWidget {
 }
 
 class _AllTreesPageState extends State<AllTreesPage> {
+  //final _SortWidgetStateKey = SortWidget().getGlobalKey();
   late List<Tree> treesToDisplayOnPage;
   late Widget title;
   late Widget searchIcon;
@@ -28,7 +32,7 @@ class _AllTreesPageState extends State<AllTreesPage> {
   late Widget defaultTitleArea;
   late Widget searchTitleArea;
   final searchController = TextEditingController();
-  String currentSortType = "scientific name";
+  String currentSortType = "Scientific Name";
   @override
   void initState() {
     super.initState();
@@ -82,6 +86,23 @@ class _AllTreesPageState extends State<AllTreesPage> {
 
   @override
   Widget build(BuildContext contextAlpha) {
+    sortByPrimaryName() => setState(() {
+          currentSortType = "Primary Name";
+          treesToDisplayOnPage
+              .sort((a, b) => (a.primaryName).compareTo(b.primaryName));
+        });
+    sortByScientificName() => setState(() {
+          currentSortType = "Scientific Name";
+          treesToDisplayOnPage
+              .sort((a, b) => (a.scientificName).compareTo(b.scientificName));
+        });
+
+    changeSortType(sortType) {
+      sortType == "Scientific Name"
+          ? sortByScientificName()
+          : sortByPrimaryName();
+    }
+
     return WillPopScope(
         onWillPop: () async {
           breadcrumb.removeLast();
@@ -144,67 +165,10 @@ class _AllTreesPageState extends State<AllTreesPage> {
               },
             ),
             const BreadCrumb(),
-            Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width / 1.6, top: 5),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: ListTileTheme(
-                        dense: true,
-                        //minVerticalPadding: 1,
-                        //horizontalTitleGap: 2,
-                        child: ExpansionTile(
-                          //tilePadding: const EdgeInsets.symmetric(horizontal: 5.0),
-                          backgroundColor: kGold,
-                          collapsedBackgroundColor: kGold,
-                          iconColor: kWhite,
-                          textColor: kWhite,
-                          collapsedTextColor: kWhite,
-                          collapsedIconColor: kWhite,
-                          title: const Text("Sort By",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15.0,
-                                  color: kWhite)),
-                          subtitle: Text(currentSortType,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.italic,
-                                  fontSize: 12.0,
-                                  color: kWhite)),
-                          children: [
-                            ListTile(
-                              title: const Text("Common Name",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14.0,
-                                      color: kWhite)),
-                              onTap: () {
-                                setState(() {
-                                  currentSortType = "Common Name";
-                                  treesToDisplayOnPage.sort((a, b) =>
-                                      (a.primaryName).compareTo(b.primaryName));
-                                });
-                              },
-                            ),
-                            ListTile(
-                              title: const Text("Scientific Name",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14.0,
-                                      color: kWhite)),
-                              onTap: () {
-                                setState(() {
-                                  currentSortType = "Scientific Name";
-                                  treesToDisplayOnPage.sort((a, b) =>
-                                      (a.scientificName)
-                                          .compareTo(b.scientificName));
-                                });
-                              },
-                            )
-                          ],
-                        ))))
+            SortWidget(
+              sortTypeText: currentSortType,
+              changeSortTypeFunction: changeSortType,
+            ),
           ]),
         ));
   }
