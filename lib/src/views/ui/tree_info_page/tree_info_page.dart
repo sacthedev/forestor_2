@@ -102,7 +102,13 @@ class InfoBody extends StatelessWidget {
         TreeInfoDropdownWidget(
             tree: tree,
             title: 'Ecology And Distribution',
-            dataType: 'ecologyAndDistribution')
+            dataType: 'ecologyAndDistribution'),
+        /*
+        ExpansionTile(
+            title: Text('Botanical Description'),
+            controlAffinity: ListTileControlAffinity.leading,
+            children: [Text(tree.botanicalDescription)])
+        */
       ],
     );
   }

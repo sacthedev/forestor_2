@@ -29,7 +29,8 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
     super.initState();
     _arrowAnimationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
-    _arrowAnimation = Tween(begin: math.pi / 2, end: (3 * math.pi) / 2)
+    //_arrowAnimation = Tween(begin: math.pi / 2, end: (3 * math.pi) / 2)
+    _arrowAnimation = Tween(begin: math.pi, end: math.pi * 2)
         .animate(_arrowAnimationController);
     if (widget.dataType == 'fieldCharacteristics') {
       bodyText = widget.tree.fieldCharacteristics;
@@ -65,7 +66,7 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
                 builder: (context, child) => Transform.rotate(
                   angle: _arrowAnimation.value,
                   child: const Icon(
-                    Icons.arrow_back_ios,
+                    Icons.arrow_drop_down_circle_outlined,
                     color: kWhite,
                   ),
                 ),
@@ -81,6 +82,7 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
                       border: Border(
                           bottom: BorderSide(width: 2, color: kLightGreen)))),
             ])),
+        /*
         AnimatedSize(
             curve: Curves.easeIn,
             duration: const Duration(milliseconds: 400),
@@ -89,6 +91,15 @@ class _TreeInfoDropdownWidgetState extends State<TreeInfoDropdownWidget>
                   ? Text(bodyText, style: const TextStyle(color: kTextMuted))
                   : null,
             )),
+            */
+        AnimatedCrossFade(
+            firstChild:
+                Text(bodyText, style: const TextStyle(color: kTextMuted)),
+            secondChild: Container(),
+            crossFadeState: _showData
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+            duration: const Duration(milliseconds: 500))
       ]),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: kLightBlue),
