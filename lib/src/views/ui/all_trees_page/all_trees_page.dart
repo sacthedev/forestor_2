@@ -166,6 +166,7 @@ class _AllTreesPageState extends State<AllTreesPage> {
             ),
             const BreadCrumb(),
             SortWidget(
+              widgetRouteParentName: AllTreesPage.route,
               sortTypeText: currentSortType,
               changeSortTypeFunction: changeSortType,
             ),

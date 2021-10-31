@@ -4,15 +4,19 @@ import 'package:flutter/widgets.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'dart:math' as math;
 
+import 'package:forestor_2/src/views/ui/key_page/sub_key_all_trees.dart';
+
 class SortWidget extends StatefulWidget {
   SortWidget(
       {Key? key,
       required this.changeSortTypeFunction,
+      required this.widgetRouteParentName,
       required this.sortTypeText})
       : super(key: key);
   final GlobalKey<_SortWidgetState> sortWidgetStateKey = GlobalKey();
   final Function changeSortTypeFunction;
   final String sortTypeText;
+  final String widgetRouteParentName;
   @override
   _SortWidgetState createState() => _SortWidgetState();
 
@@ -23,13 +27,23 @@ class _SortWidgetState extends State<SortWidget> {
   bool showBody = false;
   double sortWidgetHeight = 0;
   double animatedContainerHeight = 80;
+
   final GlobalKey<_HeadState> headStateKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     sortWidgetHeight = MediaQuery.of(context).size.height / 5.5;
+    EdgeInsets parentContainerMargin =
+        widget.widgetRouteParentName == SubKeyAllTrees.route
+            ? EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 1.6,
+                right: 5,
+                top: 35)
+            : EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 1.6,
+                right: 5,
+                top: 5);
     return Container(
-      margin: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width / 1.6, right: 5, top: 5),
+      margin: parentContainerMargin,
       padding: const EdgeInsets.symmetric(vertical: 5),
       decoration:
           BoxDecoration(color: kGold, borderRadius: BorderRadius.circular(5)),

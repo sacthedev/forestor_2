@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forestor_2/src/constants.dart';
 import 'package:forestor_2/src/data/tree.dart';
 import 'package:forestor_2/src/views/ui/breadcrumb.dart';
+import 'package:forestor_2/src/views/ui/sort_widget.dart';
 import 'package:forestor_2/src/views/ui/tree_info_page/tree_info_page.dart';
 
 class SubKeyAllTreesPageArguments {
@@ -15,11 +16,8 @@ class SubKeyAllTreesPageArguments {
       this.allTrees, this.treeIDs, this.subKeyText, this.subCharacteristicText);
 }
 
-class SubKeyAllTrees extends StatelessWidget {
-  final List<Tree> allTrees;
-  final List<int> treeIDs;
-  final String subKeyText;
-  final String subCharacteristicText;
+class SubKeyAllTrees extends StatefulWidget {
+  static const String route = '/subkeyalltrees';
   const SubKeyAllTrees(
       {Key? key,
       required this.treeIDs,
@@ -27,10 +25,45 @@ class SubKeyAllTrees extends StatelessWidget {
       required this.subKeyText,
       required this.subCharacteristicText})
       : super(key: key);
-  static const String route = '/subkeyalltrees';
+  final List<Tree> allTrees;
+  final List<int> treeIDs;
+  final String subKeyText;
+  final String subCharacteristicText;
+
+  @override
+  _SubKeyAllTrees createState() => _SubKeyAllTrees();
+}
+
+class _SubKeyAllTrees extends State<SubKeyAllTrees> {
+  String currentSortType = "Scientific Name";
+  late List<Tree> filteredTreeList;
+
+  @override
+  void initState() {
+    super.initState();
+    filteredTreeList = filterTrees(widget.treeIDs, widget.allTrees);
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Tree> filteredTreeList = filterTrees(treeIDs, allTrees);
+    sortByPrimaryName() => setState(() {
+          currentSortType = "Primary Name";
+          filteredTreeList
+              .sort((a, b) => (a.primaryName).compareTo(b.primaryName));
+        });
+
+    sortByScientificName() => setState(() {
+          currentSortType = "Scientific Name";
+          filteredTreeList
+              .sort((a, b) => (a.scientificName).compareTo(b.scientificName));
+        });
+
+    changeSortType(sortType) {
+      sortType == "Scientific Name"
+          ? sortByScientificName()
+          : sortByPrimaryName();
+    }
+
     return WillPopScope(
         onWillPop: () async {
           breadcrumb.removeLast();
@@ -57,14 +90,15 @@ class SubKeyAllTrees extends StatelessWidget {
                           children: [
                             Flexible(
                                 child: Text(
-                              '${subKeyText.toUpperCase()} KEY',
+                              '${widget.subKeyText.toUpperCase()} KEY',
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600),
                             )),
                             FittedBox(
                                 fit: BoxFit.fitWidth,
-                                child: Text(subCharacteristicText.toLowerCase(),
+                                child: Text(
+                                    widget.subCharacteristicText.toLowerCase(),
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontStyle: FontStyle.italic)))
@@ -79,7 +113,7 @@ class SubKeyAllTrees extends StatelessWidget {
                   return Container(
                     margin: index == 0
                         ? const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 20, top: 60)
+                            left: 20, right: 20, bottom: 20, top: 100)
                         : const EdgeInsets.all(20),
                     alignment: Alignment.center,
                     child: InkWell(
@@ -115,7 +149,12 @@ class SubKeyAllTrees extends StatelessWidget {
                   );
                 },
               ),
-              const BreadCrumb()
+              const BreadCrumb(),
+              SortWidget(
+                widgetRouteParentName: SubKeyAllTrees.route,
+                sortTypeText: currentSortType,
+                changeSortTypeFunction: changeSortType,
+              ),
             ])));
   }
 }
