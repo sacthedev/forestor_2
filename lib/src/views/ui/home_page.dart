@@ -1,3 +1,6 @@
+/*
+complete drawer page
+*/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forestor_2/src/data/tree.dart';
@@ -39,6 +42,23 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: const Text('HOME'),
           backgroundColor: kLightBlue,
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                  decoration: BoxDecoration(color: kLightBlue),
+                  child: Column(children: const [
+                    Expanded(
+                        child: Image(
+                      fit: BoxFit.fitWidth,
+                      image: AssetImage('assets/app_icon/splash_icon.png'),
+                    )),
+                    Text("Forestor", style: TextStyle(color: kWhite))
+                  ])),
+              ListTile(title: Text("About"))
+            ],
+          ),
         ),
         body: Center(
             child: Column(

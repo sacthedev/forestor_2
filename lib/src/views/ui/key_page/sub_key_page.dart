@@ -75,7 +75,7 @@ class SubKeyPage extends StatelessWidget {
                               child: Text(_keyText,
                                   style: const TextStyle(
                                       fontSize: 20,
-                                      fontWeight: FontWeight.w400)))),
+                                      fontWeight: FontWeight.w500)))),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kGold),
