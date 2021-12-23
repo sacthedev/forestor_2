@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             children: [
               DrawerHeader(
-                  decoration: BoxDecoration(color: kLightBlue),
+                  decoration: const BoxDecoration(color: kLightBlue),
                   child: Column(children: const [
                     Expanded(
                         child: Image(
@@ -56,7 +56,21 @@ class _HomePageState extends State<HomePage> {
                     )),
                     Text("Forestor", style: TextStyle(color: kWhite))
                   ])),
-              ListTile(title: Text("About"))
+              ListTile(
+                  leading: const Icon(Icons.message),
+                  title: const Text("About"),
+                  onTap: () {
+                    //Navigator.pop(contextAlpha);
+                    showAboutDialog(
+                        context: contextAlpha,
+                        applicationIcon: const Image(
+                            image: AssetImage('assets/app_icon/icon_48px.png')),
+
+                        //applicationIcon: FlutterLogo(),
+                        applicationVersion: '1.0.0',
+                        applicationName: "Forestor",
+                        applicationLegalese: "©2021 sacthedeveloper");
+                  })
             ],
           ),
         ),
